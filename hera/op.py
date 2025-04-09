@@ -1692,14 +1692,14 @@ class INTEGER(DataOperation):
       INTEGER is a data instruction.
     """
 
-    P = (I16,)
+    P = (I16_OR_LABEL,)
 
     def execute(self, vm):
         vm.store_memory(vm.dc, to_u16(self.args[0]))
         vm.dc += 1
 
     def assemble(self):
-        return bytes([self.args[0] & 0xFF00, self.args[0] & 0xFF])
+        return bytes([(self.args[0] & 0xFF00)//256, self.args[0] & 0xFF])
 
 
 class DSKIP(DataOperation):
@@ -1741,7 +1741,7 @@ class LP_STRING(DataOperation):
 
     def assemble(self):
         s = self.args[0]
-        length_bytes = [len(s) & 0xFF00, len(s) & 0xFF]
+        length_bytes = [(len(s) & 0xFF00)//256, len(s) & 0xFF]
         data_bytes = []
         for c in s:
             data_bytes.append(0)

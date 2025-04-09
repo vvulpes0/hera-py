@@ -80,6 +80,7 @@ def assemble_and_print(program: Program, settings: Settings) -> None:
 
         with open(path + ".ldata", "w", encoding="ascii") as f:
             f.write(data)
+            f.write("\n")
 
 
 def bytes_to_hex(b: bytes) -> str:
