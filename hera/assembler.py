@@ -75,10 +75,12 @@ def assemble_and_print(program: Program, settings: Settings) -> None:
             path = settings.path
 
         with open(path + ".lcode", "w", encoding="ascii") as f:
+            f.write("v2.0 raw\n")
             f.write(code)
             f.write("\n")
 
         with open(path + ".ldata", "w", encoding="ascii") as f:
+            f.write("v2.0 raw\n")
             f.write(data)
             f.write("\n")
 
